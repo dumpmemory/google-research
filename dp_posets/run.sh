@@ -1,4 +1,3 @@
-# coding=utf-8
 # Copyright 2024 The Google Research Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Setup for eq_mag_prediction.
+#!/bin/bash
+set -e
+set -x
 
-In order to install execute:
-pip --no-deps install -e .
-from root folder of this project.
-"""
+virtualenv -p python3 .
+source ./bin/activate
 
-import setuptools
-
-setuptools.setup(
-    name='eq_mag_prediction',
-    packages=setuptools.find_packages(),
-)
+pip install -r requirements.txt
+pushd ..
+python3 -m dp_posets.random_poset_test
+popd

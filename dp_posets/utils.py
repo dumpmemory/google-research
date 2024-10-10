@@ -13,16 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Setup for eq_mag_prediction.
+"""Utility functions for poset experiments."""
 
-In order to install execute:
-pip --no-deps install -e .
-from root folder of this project.
-"""
+import numpy as np
 
-import setuptools
 
-setuptools.setup(
-    name='eq_mag_prediction',
-    packages=setuptools.find_packages(),
-)
+def compute_average_squared_l2_norm(points):
+  """Returns average squared l_{2} norm of given points.
+
+  Args:
+    points: list of vectors.
+  """
+  return np.mean(np.square(np.linalg.norm(points, axis=1)))
+
+
+def compute_linf_average_squared_l2_norm(d):
+  """Returns average squared l_{2} norm of d-dim l_inf unit ball.
+
+  See Lemma 4.1 in the paper.
+
+  Args:
+    d: dimension of l_inf unit ball.
+  """
+  return d / 3

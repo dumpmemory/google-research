@@ -13,16 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Setup for eq_mag_prediction.
+from absl.testing import absltest
+from absl.testing import parameterized
+import numpy as np
 
-In order to install execute:
-pip --no-deps install -e .
-from root folder of this project.
-"""
+from dp_posets import utils
 
-import setuptools
 
-setuptools.setup(
-    name='eq_mag_prediction',
-    packages=setuptools.find_packages(),
-)
+class UtilsTest(parameterized.TestCase):
+
+  @parameterized.parameters((np.array([[1, 2], [3, 4], [0, 3]]), 13.0))
+  def test_compute_average_squared_l2_norm(self, points, expected_result):
+    self.assertEqual(
+        utils.compute_average_squared_l2_norm(points),
+        expected_result,
+    )
+
+
+if __name__ == "__main__":
+  absltest.main()
